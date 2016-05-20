@@ -4,7 +4,7 @@
 
 #temp file
 tmp=/root/phpmaildet.tmp
-
+mailto=you@example.com
 #Add hostname, date, and path to log to file
 echo "$(hostname)" > $tmp; echo >> $tmp; date >> $tmp; echo >> $tmp
 
@@ -16,6 +16,6 @@ grep 'home' /var/log/php-mail.log|awk '{print $3}'| sort -n|tr -d '[',']'| cut -
 #Email execution and cleanup
 if [ -s $tmp ]
 then
-mail -s "PHP Mail Script Detector $(hostname)" support@312linux.com < $tmp
+mail -s "PHP Mail Script Detector $(hostname)" $mailto < $tmp
 fi
 rm -f $tmp
