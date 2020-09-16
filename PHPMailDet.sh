@@ -8,10 +8,10 @@ mailto=you@example.com
 #Add hostname, date, and path to log to file
 echo "$(hostname)" > $tmp; echo >> $tmp; date >> $tmp; echo >> $tmp
 
-echo "Log file = /var/log/php-mail.log" >> $tmp; echo >> $tmp
+echo "Log file = /var/log/phpmail.log" >> $tmp; echo >> $tmp
 
 #Query the mail log, sort, and remove unneccessary info incl. brackets and trailing ':'
-grep 'home' /var/log/php-mail.log|awk '{print $3}'| sort -n|tr -d '[',']'| cut -f 1 -d':' | uniq -c | sort -n >> $tmp
+grep 'home' /var/log/phpmail.log| grep -v "_exclude_me_"| awk '{print $6}'| sort -n|tr -d '[',']'| cut -f 1 -d':' | uniq -c | sort -n
 
 #Email execution and cleanup
 if [ -s $tmp ]
